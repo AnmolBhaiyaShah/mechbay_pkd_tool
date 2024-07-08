@@ -113,7 +113,7 @@ class PKDArchive(GundamDataFile):
 
         # index size
         index_size = (record_count * 12) + sum(
-            [len(filename.encode("utf-8")) + 1 for filename in records.keys()]
+            [len(file['filename'].encode("utf-8")) + 1 for file in records]
         )
         string_bytes += self.write_int(index_size, 4)
 
@@ -121,7 +121,11 @@ class PKDArchive(GundamDataFile):
         name_start = record_count * 12
         file_start = index_size + 20
         file_start += padding - (file_start % padding)
-        for filename, data in records.items():
+
+
+        for file in records:
+            filename=file['filename']
+            data=file['bytes']
             # File pointer
             string_bytes += self.write_int(file_start, 4)
 
@@ -135,11 +139,15 @@ class PKDArchive(GundamDataFile):
             string_bytes += self.write_int(name_start, 4)
             name_start += len(filename.encode("utf-8")) + 1
 
-        for filename in records.keys():
+
+        for file in records:
+            filename=file['filename']
             string_bytes += filename.encode("utf-8") + b"\x00"
         string_bytes += (padding - (len(string_bytes) % padding)) * b"\x00"
 
-        for filename, data in records.items():
+        for file in records:
+            filename=file['filename']
+            data=file['bytes']
             string_bytes += data
             string_bytes += (padding - (len(string_bytes) % padding)) * b"\x00"
 
