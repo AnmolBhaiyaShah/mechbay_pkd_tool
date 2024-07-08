@@ -1,12 +1,13 @@
 # New Open Source Report: Mech Bay
 Utilities for reading and writing data files for SD GUNDAM G GENERATION CROSS RAYS.
 
-This is currently a mess. The expansion pack radically changed the layout of some files (primarily characters)
-and wrecked a lot of the progress I had made. I haven't had the time/energy to update things.
+after a clear lookup of the original files, I was able to find the exact mess ffaristocrat made and fixed it
 
 ## Tools
-
 You'll need Python 3.9 to run the scripts.
+
+## Usage
+once you have python, open command prompt locate to the folder of this portable installation and get started with any of the scripts
 
 ## General Thoughts
 
